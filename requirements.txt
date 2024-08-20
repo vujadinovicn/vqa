@@ -1,0 +1,7 @@
+torch
+numpy
+Levenshtein
+Pillow
+torchvision
+transformers
+tensorboard
