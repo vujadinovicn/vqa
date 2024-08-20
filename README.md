@@ -13,7 +13,7 @@ The goal of the project was research of both historic and current VQA technologi
 ## What is VQA?
 Visual Question Answering (VQA) is an interdisciplinary research area that involves understanding both vision and language to answer questions based on visual content. 
 
-![](what_is_vqa.png)
+![](what_is_vqa.jpg)
 
 ## Why VQA?
 With the rise of popularity of foundation models and the all-overarcing efforts in developing AGI, multi-modal models that ideally have the ability to understand all possible modalities (audio, image/video, text...) have surfaced as one of the paths towards advancing the mentioned efforts.
@@ -44,6 +44,8 @@ So, we started thinking about ways we could modify the setup proposed in the [20
 ### #1 Changing Text and Image Encoders
 
 Our initial modification idea is simple - form better understanding of the text and image by using better encoders! And what "better" nets have we uncovered since 2015? Transformers!
+
+![](transformers.png)
 
 We replaced the LSTM with *BERT encoder* for text, and VGG for *DINOv2 ViT* for image encoding:
 
@@ -85,7 +87,7 @@ Modify this file to change any of the desired parameters.
 ### Training
 Here's a nifty illustration of our training process:
 
-![](training.png)
+![](train.png)
 
 For it, we implemented a custom train pipeline that can be accessed by running the train.py script:
 
@@ -100,7 +102,7 @@ tensorboard --logdir=runs
 
 We trained our model on the pre-saved embedding train split, using an A100 GPU.
 
-Feel free to check out our current [best model](results/best_model.py) - 51% accuracy on the validation split.
+Feel free to check out our current [best model](results/best_model.pkl) - 51% accuracy on the validation split.
 
 Logs from our trainings can be found in the [tensorboard/](tensorboard/) folder.
 
@@ -111,7 +113,7 @@ Run the inference.py script to perform VQA on new images and questions:
 python inference.py --image <path_to_image> --question "<your_question>"
 ```
 
-Currently, inference is done with our current [best model](results/best_model.py) - you can change this in [configl.yml](config.yml) script.
+Currently, inference is done with our current [best model](results/best_model.pkl) - you can change this in [configl.yml](config.yml) script.
 
 ### Dependencies
 The project requires Python 3.8+ and the dependencies listed in requirements.txt. 
