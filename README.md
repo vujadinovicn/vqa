@@ -61,7 +61,7 @@ There are different ways to combine the information from the projected image and
 We tried the following three:
 1. *Stacking* - we simply stack together the image and text embeddings, concatinating those two vectors.
 2. *Multiplication* - point-wise multiplication of the vectors is performed.
-3. *Attention* - 
+3. *Attention* - using a multi-head attention mechanism to fuse the image and text embeddings by focusing on the most relevant parts of each modality.
 
 ## Implementation
 With our theory and experiment ideas sorted out, here's how we implemented our VQA models:
