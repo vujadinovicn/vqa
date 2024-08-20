@@ -13,7 +13,7 @@ The goal of the project was research of both historic and current VQA technologi
 ## What is VQA?
 Visual Question Answering (VQA) is an interdisciplinary research area that involves understanding both vision and language to answer questions based on visual content. 
 
-![](what_is_vqa.jpg)
+![](assets/what_is_vqa.jpg)
 
 ## Why VQA?
 With the rise of popularity of foundation models and the all-overarcing efforts in developing AGI, multi-modal models that ideally have the ability to understand all possible modalities (audio, image/video, text...) have surfaced as one of the paths towards advancing the mentioned efforts.
@@ -27,7 +27,7 @@ Originally, we wanted to fully grasp and implement one of the first solutions to
 
 The paper introduces a dataset for training VQA models, as well as proposes a VQA model arhitecture:
 
-![](2015_vqa.png)
+![](assets/2015_vqa.png)
 
 From here we'd like to highlight the three main parts of the VQA model:
 1. **Text Encoder** - transforms natural language into embeddings (LSTM in the paper)
@@ -45,11 +45,11 @@ So, we started thinking about ways we could modify the setup proposed in the [20
 
 Our initial modification idea is simple - form better understanding of the text and image by using better encoders! And what "better" nets have we uncovered since 2015? Transformers!
 
-![](transformers.png)
+![](assets/transformers.png)
 
 We replaced the LSTM with *BERT encoder* for text, and VGG for *DINOv2 ViT* for image encoding:
 
-![](our_vqa.png)
+![](assets/our_vqa.png)
 
 **Important:** We freeze these large models during training and use them *as is* - this allows us to save on compute but poses a potential problem with our pipeline -> text and image embeddings are not in the same space.
 
@@ -87,7 +87,7 @@ Modify this file to change any of the desired parameters.
 ### Training
 Here's a nifty illustration of our training process:
 
-![](train.png)
+![](assets/train.png)
 
 For it, we implemented a custom train pipeline that can be accessed by running the train.py script:
 
