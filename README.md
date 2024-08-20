@@ -129,4 +129,14 @@ You can use our repo in two main ways:
 1. Simply run inference.py on your own images and questions and test our current best solution :)
 2. Try to reporduce our whole workflow and make modifications to it! Let us know if you get any new great insights and results :)
 
+## Pretrained models
 
+| Model               |Training accuracy | Validation accuracy | Download    |
+|:-------------------:|:-----------------:|:-------------------:|:-----------:|
+| VQA-stack I  | 60.1%         | 51%           | [link](https://drive.google.com/file/d/1_1nM1gtF0W4nUXSEiUNQ8UhD6XkXbfZ6/view?usp=sharing) |
+| VQA-stack II  | 59.4%         | 50.7%           | [link](https://drive.google.com/file/d/1mbMHEQBOqcMQXmQ2DL3u9b-zLxBedptT/view?usp=sharing) |
+| VQA-mul  | 49.8%         | 48.2%           | [link](https://drive.google.com/file/d/1mX-Wz_PEsb7XggT2hBdLeTTDBAq2lj_h/view?usp=sharing) |
+| VQA-attention I  | 48.3%         | 44.6%           | [link](https://drive.google.com/file/d/1Gx_jeAT3PMKgnR9NQS20b1EajwBpGPN0/view?usp=sharing) |
+| VQA-attention II | 43.2%         | 41.4%           | [link](https://drive.google.com/file/d/1X3gqt3bfQDYI2Y0alNYb1klEOIe0jNNq/view?usp=sharing) |
+
+A corresponding [model card](MODEL_CARD.md) is included in the repository.
