@@ -1,8 +1,8 @@
 # Visual Question Answering
 
-This repository containes our project from [PSIML X](https://psiml.pfe.rs/) summer school. 
+This repository contains our project from [PSIML X](https://psiml.pfe.rs/) summer school. 
 
-The goal of the project was research of both historic and current VQA technologies, together with adding modification to existing pipelines and trying to better current results.
+The goal of the project was research of both historic and current VQA technologies, together with adding modifications to existing pipelines and trying to better current results.
 
 *You can find more information on the project by checking out our [presentation](docs/presentation.pdf)*
 
@@ -16,25 +16,25 @@ Visual Question Answering (VQA) is an interdisciplinary research area that invol
 ![](assets/what_is_vqa.jpg)
 
 ## Why VQA?
-With the rise of popularity of foundation models and the all-overarcing efforts in developing AGI, multi-modal models that ideally have the ability to understand all possible modalities (audio, image/video, text...) have surfaced as one of the paths towards advancing the mentioned efforts.
+With the rise of the popularity of foundation models and the all-overarching efforts in developing AGI, multi-modal models that ideally have the ability to understand all possible modalities (audio, image/video, text...) have surfaced as one of the paths towards advancing the mentioned efforts.
 
-We deem them a highly fruitful area for both scientific research and industry applications - which is why we decided to dedicate our project days at the summer school to better understing how these models work. 
+We deem them a highly fruitful area for both scientific research and industry applications - which is why we decided to dedicate our project days at the summer school to better understanding how these models work. 
 
 VQA is just one of the problems that can be solved by multi-modal NNs. It's a starting point to a plethora of exciting topics and we aim to continue diving deeper into this field.
 
 ## Starting point
 Originally, we wanted to fully grasp and implement one of the first solutions to the VQA problem, presented in the [2015 VQA paper](https://arxiv.org/abs/1505.00468).
 
-The paper introduces a dataset for training VQA models, as well as proposes a VQA model arhitecture:
+The paper introduces a dataset for training VQA models, as well as proposes a VQA model architecture:
 
 ![](assets/2015_vqa.png)
 
 From here we'd like to highlight the three main parts of the VQA model:
 1. **Text Encoder** - transforms natural language into embeddings (LSTM in the paper)
-2. **Image Encoder** - transforms images into embeddings (VQQ net in the paper)
+2. **Image Encoder** - transforms images into embeddings (VGG net in the paper)
 3. **Fusion NN**- where text and image embeddings meet + an MLP to map the relationships between them
 
-So, for VQA, we need a way to embed the image we want to ask our model about, as well as the question itself - aka we need to understand both text and images. Not only that, but we have to form that understanding through embeddings that are in the same vector space - to later be able to fuse those vectors and learn relationship between the features in that space.
+So, for VQA, we need a way to embed the image we want to ask our model about, as well as the question itself - aka we need to understand both text and images. Not only that, but we have to form that understanding through embeddings that are in the same vector space - to later be able to fuse those vectors and learn the relationship between the features in that space.
 
 ## Our modification
 The year 2015 was longer ago than we'd like to admit, and with AI being such a rapidly developing field - we've learned a lot about NNs since the original VQA paper came out.
@@ -43,7 +43,7 @@ So, we started thinking about ways we could modify the setup proposed in the [20
 
 ### #1 Changing Text and Image Encoders
 
-Our initial modification idea is simple - form better understanding of the text and image by using better encoders! And what "better" nets have we uncovered since 2015? Transformers!
+Our initial modification idea is simple - form a better understanding of the text and image by using better encoders! And what "better" nets have we uncovered since 2015? Transformers!
 
 ![](assets/transformers.png)
 
@@ -53,13 +53,13 @@ We replaced the LSTM with *BERT encoder* for text, and VGG for *DINOv2 ViT* for 
 
 **Important:** We freeze these large models during training and use them *as is* - this allows us to save on compute but poses a potential problem with our pipeline -> text and image embeddings are not in the same space.
 
-This is why we added *projection layers* (a simple FC layer each) like in the original 2015 paper, to map those initial embeddings outputed from the two powerful but not made to work together models, into as close of a same space as possible.
+This is why we added *projection layers* (a simple FC layer each) like in the original 2015 paper, to map those initial embeddings output from the two powerful but not made-to-work-together models, into as close of the same space as possible.
 
 ### #2 Playing with Fusion
 There are different ways to combine the information from the projected image and text embeddings.
 
 We tried the following three:
-1. *Stacking* - we simply stack together the image and text embeddings, concatinating those two vectors.
+1. *Stacking* - we simply stack together the image and text embeddings, concatenating those two vectors.
 2. *Multiplication* - point-wise multiplication of the vectors is performed.
 3. *Attention* - using a multi-head attention mechanism to fuse the image and text embeddings by focusing on the most relevant parts of each modality.
 
@@ -75,12 +75,12 @@ bash download_dataset.sh
 ```
 
 ### Data pre-processing
-To up the efficiency of our training, we pre-computed the embeddings for all of our train and validation images, questions and answers. 
+To up the efficiency of our training, we pre-computed the embeddings for all of our train and validation images, questions, and answers. 
 
-This optimization is somehwat specific to our pipeline, thanks to the fact that we do not change the weights of the pre-trained DinoV2 and BERT models.
+This optimization is somewhat specific to our pipeline, thanks to the fact that we do not change the weights of the pre-trained DinoV2 and BERT models.
 
 ### Config 
-Both the train.py and inference.py script rely on the [config.yml](config.yml) file.
+Both the train.py and inference.py scripts rely on the [config.yml](config.yml) file.
 
 Modify this file to change any of the desired parameters.
 
@@ -127,7 +127,7 @@ pip install -r requirements.txt
 ### Usage
 You can use our repo in two main ways:
 1. Simply run inference.py on your own images and questions and test our current best solution :)
-2. Try to reporduce our whole workflow and make modifications to it! Let us know if you get any new great insights and results :)
+2. Try to reproduce our whole workflow and make modifications to it! Let us know if you get any new great insights and results :)
 
 ## Pretrained models
 
